@@ -1,6 +1,7 @@
 site_name: Open-Channel Solid State Drives
 theme: readthedocs
 repo_url: https://github.com/OpenChannelSSD/Documentation
+google_analytics: ['UA-57193430-2', 'openchannelssd.readthedocs.org']
 pages:
  - Introduction: index.md
  - User Documentation:
