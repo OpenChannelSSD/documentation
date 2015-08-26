@@ -33,7 +33,7 @@ deletes the configured "test" target.
 
 # List block information on backend device
 
-    echo "s nvme0n1" > /sys/module/lnvm/parameters/configure_debug
+    echo "s nulln0" > /sys/module/lnvm/parameters/configure_debug
 
 List's the internal information of a target. 
 
