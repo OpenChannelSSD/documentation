@@ -1,5 +1,10 @@
 site_name: Open-Channel Solid State Drives
 pages:
- - Home: index.md
- - GettingStarted: gettingstarted.md
+ - Introduction: index.md
+ - 'User Documentation':
+     - 'Getting Started': gettingstarted.md
+     - 'Commands': commands.md
+ - 'Developer Documentation':
+     - 'Source files': source.md
+     - 'Modules': modules.md
 theme: readthedocs
