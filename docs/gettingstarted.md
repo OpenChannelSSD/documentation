@@ -4,11 +4,17 @@ Open-Channel SSDs require support in the kernel. The code is currently in the
 process of being upstreamed ([lkml](https://lkml.org/lkml/2015/7/22/541)), until
 it is upstream, the source provided at the github site must be used.
 
+To use the framework. The following must be met:
+
+1. A compatible device driver that is registered with LightNVM. For example null_nvm, QEMU NVMe or Open-Channel SSD compatible hardware.
+2. Initialized block manager on top of the device driver. The block manager maintains a list of free/in-use/bad  blocks on media and exposes a get/put block API that upper layers can use to allocate into the SSD address space.
+3. A initialized target on top of the block manager that exposes the SSD address space. The target can expose a traditional block I/O interface, or more esoteric interfaces such as Key-value stores, object-stores and so forth.
+
 # Compile Custom Kernel
 
 Check out the Linux kernel at
 
-`git clone https://github.com/OpenChannelSSD/linux.git`
+   `git clone https://github.com/OpenChannelSSD/linux.git`
 
 Make sure that the .config file at least includes:
 
