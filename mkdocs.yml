@@ -7,5 +7,6 @@ pages:
      - 'Getting Started': gettingstarted.md
      - 'Commands': commands.md
  - Developer Documentation:
+     - 'Specification': specification.md
      - 'Source files': source.md
      - 'Modules': modules.md
