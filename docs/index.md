@@ -8,6 +8,9 @@ Open-channel SSDs moves part or all of the FTL responsibility into the host syst
 
 The Linux host architecture for Open-channel SSDs, depicted in Figure 1, consists of device driver integration,  multiple block managers and multiple targets and a core. To initialize an open-channel SSD, a storage protocol, such as NVMe, is extended with identify structures and custom command set. That allows the host to enumerate the available features, extensions and hardware of the device and issue I/Os directly to the physical media.
 
+![Figure 1](img/LightNVMArch.png)
+
+
 The block manager handles flash block information on disk. A block manager is different for which types of features and extensions that an SSD supports. For example, a host-based open-channel SSD requires maintaining a metadata file-system, while a hybrid SSD, which may implement block management, lets the block manager read the block management information from disk.
 
 Targets implement the translation logic, data placement, garbage collection routines and so forth. The target may then choose to export the address space is various ways. Such as a block device, key-value store, or object store. By dividing the responsibility between block management, and data placement and garbage collection. The target is decoupled from the underlying media and thereby allows multiple vendors to provide hardware and allows the target to cover multiple disk and create a single address space across all media available. 
