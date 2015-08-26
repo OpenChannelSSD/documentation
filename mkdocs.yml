@@ -9,4 +9,3 @@ pages:
  - Developer Documentation:
      - 'Specification': specification.md
      - 'Source files': source.md
-     - 'Modules': modules.md
