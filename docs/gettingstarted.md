@@ -1,10 +1,16 @@
-# Requirements
+# How to use
 
-Check out the Linux kernel
+Open-Channel SSDs require support in the kernel. The code is currently in the
+process of being upstreamed ([lkml](https://lkml.org/lkml/2015/7/22/541)), until
+it is upstream, the source provided at the github site must be used.
+
+# Compile Custom Kernel
+
+Check out the Linux kernel at
 
 `git clone https://github.com/OpenChannelSSD/linux.git`
 
-Configure it to at least include 
+Make sure that the .config file at least includes:
 
     CONFIG_NVM=y
     # Hybrid target support (required to expose a block device)
@@ -12,45 +18,13 @@ Configure it to at least include
     # Hybrid block manager support (required)
     CONFIG_NVM_BM_HB=y
     # For null_nvm support
-    CONFIG_NVM_NULL_NVM=m
+    CONFIG_NVM_NULL_NVM=y
     # For NVMe support
-    CONFIG_BLK_DEV_NVME=m
+    CONFIG_BLK_DEV_NVME=y
 
-# How to use
+Compile the kernel and install using the guide for your distribution.
 
-Open-Channel SSDs require support in the kernel. As the code is in the process of being upstreamed ([lkml](https://lkml.org/lkml/2015/7/22/541)), a modified kernel implementing this support must be used. In order to compile the necessary modules see the requirements section.
-
-# Target administration
-
-## Add target
-
-After the modified kernel is booted and either NVMe module or null_blk module is used, use the following command to initialize a target (FTL) on top of a open-channel compatible device.
-
-    echo "a nvme0n1 test rrpc 0:0" > /sys/module/lnvm/parameters/configure_debug
-
-The parameters is as following:
-
- 1.  a -> Adds a target to a backend device
- 2.  nvme0n1 -> Backend device (use cat /sys/module/lnvm/parameters/configure_debug to see available devices).
- 3.  test -> Name of target to be exposed at /dev/test.
- 4.  rrpc -> Name of the target engine. Our case rrpc.
- 5.  0:0 is start channel : end channel. This is a range of how many channels of the attached open-channel SSD device that should be allocated to the target. 
-
-After successfully registering the target. You may issue reads and writes to /dev/mytarget.
-
-## Delete target
-
-    echo "d test" > /sys/module/lnvm/parameters/configure_debug
-
-deletes the configured "test" target.
-
-## List block information on backend device
-
-    echo "s nvme0n1" > /sys/module/lnvm/parameters/configure_debug
-
-List's the internal information of a target. 
-
-# Initialize using null_blk driver
+# Initialize using null_nvm driver
 Instantiate the module with the following parameters
 
 `queue_mode=2 gb=4 nr_devices=1 nvm_enable=1 nvm_num_channels=1`
@@ -109,6 +83,25 @@ QEMU support the following LightNVM-specific parameters:
     - lbbfrequency:<int> : Bad block frequency for generating bad block table. If no frequency is provided LNVM_DEFAULT_BB_FREQ will be used.
 
 The list of LightNVM parameters in QEMU can be found in `$QUEMU_DIR/hw/block/nvme.c` under the _Advanced optional options_ comment.
+
+# Add target on top of device
+
+After the modified kernel is booted and the null_nvm module is
+loaded, a target is ready to be initialized on top. Use the following command to
+initialize a target (FTL):
+
+    echo "a nulln0 test rrpc 0:0" > /sys/module/lnvm/parameters/configure_debug
+
+The parameters is as following:
+
+ 1.  a -> Adds a target to a backend device
+ 2.  nulln0 -> Backend device (use cat /sys/module/lnvm/parameters/configure_debug to see available devices).
+ 3.  test -> Name of target to be exposed at /dev/test.
+ 4.  rrpc -> Name of the target engine. Our case rrpc.
+ 5.  0:0 is start channel : end channel. This is a range of how many channels of the attached open-channel SSD device that should be allocated to the target. 
+
+After successfully registering the target. You may issue reads and writes to
+/dev/test
 
 # Common Problems
 
