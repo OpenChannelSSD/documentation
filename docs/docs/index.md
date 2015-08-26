@@ -1,4 +1,4 @@
-# Welcome to MkDocs
+# Open-Channel Solid State Drives
 
 For full documentation visit [mkdocs.org](http://mkdocs.org).
 
