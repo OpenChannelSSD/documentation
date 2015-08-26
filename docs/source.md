@@ -1,4 +1,4 @@
-# Code structure
+# Code structure for Linux Kernel
 
 The LightNVM framework is divided into support for device drivers, a core part
 that consists of management, block managers and targets.
