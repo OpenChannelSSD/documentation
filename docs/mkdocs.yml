@@ -1,4 +1,5 @@
 site_name: Open-Channel Solid State Drives
+theme: readthedocs
 
 pages:
  - Introduction: index.md
@@ -8,4 +9,3 @@ pages:
  - Developer Documentation:
      - 'Source files': source.md
      - 'Modules': modules.md
-theme: readthedocs
