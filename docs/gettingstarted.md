@@ -19,6 +19,8 @@ Check out the Linux kernel at
 Make sure that the .config file at least includes:
 
     CONFIG_NVM=y
+    # Expose the /sys/module/lnvm/parameters/configure_debug interface
+    CONFIG_NVM_DEBUG=y
     # Hybrid target support (required to expose a block device)
     CONFIG_NVM_RRPC=y
     # Hybrid block manager support (required)
