@@ -8,5 +8,6 @@ pages:
      - 'Getting Started': gettingstarted.md
      - 'Commands': commands.md
  - Developer Documentation:
+     - 'Projects': projects.md
      - 'Specification': specification.md
      - 'Source files': source.md
