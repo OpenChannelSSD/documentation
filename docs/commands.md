@@ -2,7 +2,7 @@
 
 Supported devices registers itself with LightNVM upon initialization. To list registered devices, you may run the following command:
 
-    # With lnvm
+    # With lnvm (https://github.com/OpenChannelSSD/lightnvm-adm)
     lnvm devices
 
     # With debug interface
@@ -10,14 +10,14 @@ Supported devices registers itself with LightNVM upon initialization. To list re
 
 Targets and their versions is listed with
 
-    lnvm info
+    lnvm info 
 
 # Add target on top of device
 
 Targets are initialized on top of a device. A target is the logic to expose the raw media to user-space. For example as a block device (rrpc) or directly to user-space (nba). Use the following command to
 initialize a target (FTL):
 
-    # With lnvm
+    # With lnvm (https://github.com/OpenChannelSSD/lightnvm-adm)
     lnvm create -d nulln0 -n test -t rrpc
     lnvm create -d nulln0 -n test -t rrpc -o 0:0
     
@@ -38,7 +38,7 @@ After successfully registering the target. You may issue reads and writes to
 # Delete target
 An instance of a target is deleted by:
 
-    # With lnvm
+    # With lnvm (https://github.com/OpenChannelSSD/lightnvm-adm)
     lnvm remove test
     
     # With debug interface
