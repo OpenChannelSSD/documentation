@@ -1,17 +1,27 @@
-# See registered device
+# List devices and targets
 
-Devices that registers as a LightNVM device, is not exposed as a block device
-right away. This requires that a target is configured. To see if a device if
-registered, you may run the following command:
+Supported devices registers itself with LightNVM upon initialization. To list registered devices, you may run the following command:
 
+    # With lnvm
+    lnvm devices
+
+    # With debug interface
     cat /sys/module/lnvm/parameters/configure_debug
 
-# Add target
+Targets and their versions is listed with
 
-After the modified kernel is booted and devices have been reigstered with
-LightNVM, a target is ready to be initialized on top. Use the following command o
+    lnvm info
+
+# Add target on top of device
+
+Targets are initialized on top of a device. A target is the logic to expose the raw media to user-space. For example as a block device (rrpc) or directly to user-space (nba). Use the following command to
 initialize a target (FTL):
 
+    # With lnvm
+    lnvm create -d nulln0 -n test -t rrpc
+    lnvm create -d nulln0 -n test -t rrpc -o 0:0
+    
+    # With Debug interface
     echo "a nulln0 test rrpc 0:0" > /sys/module/lnvm/parameters/configure_debug
 
 The parameters is as following:
@@ -19,14 +29,19 @@ The parameters is as following:
  1.  a -> Adds a target to a backend device
  2.  nulln0 -> Backend device (use cat /sys/module/lnvm/parameters/configure_debug to see available devices).
  3.  test -> Name of target to be exposed at /dev/test.
- 4.  rrpc -> Name of the target engine. Our case rrpc.
+ 4.  rrpc -> Name of the target engine. For this case rrpc.
  5.  0:0 is start channel : end channel. This is a range of how many channels of the attached open-channel SSD device that should be allocated to the target. 
 
 After successfully registering the target. You may issue reads and writes to
 /dev/test
 
 # Delete target
+An instance of a target is deleted by:
 
+    # With lnvm
+    lnvm remove test
+    
+    # With debug interface
     echo "d test" > /sys/module/lnvm/parameters/configure_debug
 
 deletes the configured "test" target.
@@ -36,5 +51,3 @@ deletes the configured "test" target.
     echo "s nulln0" > /sys/module/lnvm/parameters/configure_debug
 
 List's the internal information of a target. 
-
-
