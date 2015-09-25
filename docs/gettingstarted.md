@@ -32,6 +32,18 @@ Make sure that the .config file at least includes:
 
 Compile the kernel and install using the guide for your distribution.
 
+# Compile management interface (lnvm)
+
+Check out the management tool source at:
+
+   `git clone https://github.com/OpenChannelSSD/lightnvm-adm.git`
+   
+The tool can then be installed (into /usr/local/bin) by 
+
+    make; sudo make install
+
+After which it can be used to manage your LightNVM devices.
+
 # Initialize using null_nvm driver
 Instantiate the module with the following parameters
 
