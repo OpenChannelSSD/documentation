@@ -1,3 +1,3 @@
-An Open-Channel SSD must identify itself to the host with the geometry that it has. This specification can be accessed from [here](http://goo.gl/BYTjLI).
+An Open-Channel SSD must support the Open-Channel SSD specification. The specification can be accessed [here](http://goo.gl/BYTjLI).
 
-It is open for comments.
+Feel free to add comments.
