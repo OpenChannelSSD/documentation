@@ -1,18 +1,16 @@
 # How to use
 
-Open-Channel SSDs require support in the kernel. The code is currently in the
-process of being upstreamed ([lkml](https://lkml.org/lkml/2015/7/22/541)), until
-it is upstream, the source provided at the github site must be used.
+Open-Channel SSDs require support in the kernel. The code is included in Linux Kernel 4.4+. Either grab the latest kernel version or use the latest source at the github /linux repository.
 
-To use the framework. The following must be met:
+After booting the kernel. To enable LightNVM, the following must be met:
 
-1. A compatible device driver that is registered with LightNVM. For example null_nvm, QEMU NVMe or Open-Channel SSD compatible hardware.
-2. Initialized block manager on top of the device driver. The block manager maintains a list of free/in-use/bad  blocks on media and exposes a get/put block API that upper layers can use to allocate into the SSD address space.
-3. A initialized target on top of the block manager that exposes the SSD address space. The target can expose a traditional block I/O interface, or more esoteric interfaces such as Key-value stores, object-stores and so forth.
+1. A compatible device driver that is registered with LightNVM. For example null_blk, QEMU NVMe or Open-Channel SSD compatible hardware.
+2. Initialized media manager on top of the device driver. The media manager maintains a list of free/in-use/bad  blocks on media and exposes a get/put block API that upper layers can use to allocate into the SSD address space.
+3. An initialized target on top of the block manager that exposes the SSD address space. The target can expose a traditional block I/O interface, or more esoteric interfaces such as key-value stores, object-stores and so forth.
 
-# Compile Custom Kernel
+# Compile Latest Kernel
 
-Check out the Linux kernel at
+Either download latest Linux kernel (4.4+) or check out the latest Linux kernel at
 
    `git clone https://github.com/OpenChannelSSD/linux.git`
 
@@ -24,9 +22,9 @@ Make sure that the .config file at least includes:
     # Hybrid target support (required to expose a block device)
     CONFIG_NVM_RRPC=y
     # Hybrid block manager support (required)
-    CONFIG_NVM_BM_HB=y
-    # For null_nvm support
-    CONFIG_NVM_NULL_NVM=y
+    CONFIG_NVM_GENNVM=y
+    # For null_blk support
+    CONFIG_BLK_DEV_NULL=y
     # For NVMe support
     CONFIG_BLK_DEV_NVME=y
 
@@ -44,12 +42,12 @@ The tool can then be installed (into /usr/local/bin) by
 
 After which it can be used to manage your LightNVM devices.
 
-# Initialize using null_nvm driver
+# Initialize using null_blk driver
 Instantiate the module with the following parameters
 
-`queue_mode=2 gb=4 nr_devices=1 nvm_enable=1 nvm_num_channels=1`
+`use_lightnvm=1 gb=4`
 
-That will instantiate the LightNVM driver with a 4GB SSD, with a single channel. You can see that it was instantiated by checking the kernel log. 
+That will instantiate the LightNVM driver with a 4GB SSD. You can see that it was instantiated by checking the kernel log. 
 
 `dmesg |grep nvm`
 
@@ -57,7 +55,6 @@ where the output should be similar to
 
     [    2.120740] nvm: registered nulln0 with luns: 1 blocks: 2048 sector size: 4096
     [    2.325021] nvm: registered nvme0n1 with luns: 1 blocks: 2044 sector size: 4096
-    [  188.228560] nvm: rrpc initialized with 1 luns and 261632 pages.
 
 # Instantiate NVMe driver using QEMU
 
