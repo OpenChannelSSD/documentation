@@ -5,26 +5,26 @@ that consists of management, block managers and targets.
 
 Current the NVMe device driver in
 
-    drivers/block/nvme-core.c
+    drivers/nvme/host/pci.c
 
 has been extended with support for LightNVM devices through
 
-    drivers/block/nvme-lightnvm.c
+    drivers/nvme/host/lightnvm.c
 
-The source code for the core is placed within
+The source code for the LightNVM core is placed within
 
     drivers/lightnvm/core.c
     include/linux/lightnvm.h
 
-with the block managers implemented with the bm\_ prefix
+with the generic media manager implemented at:
 
-    drivers/lightnvm/bm_hb.[ch]
+    drivers/lightnvm/gennvm.[ch]
 
-and targets with the tgt\_ prefix:
+and rrpc target available at:
 
-    drivers/lightnvm/tgt_rrpc.[ch]
+    drivers/lightnvm/rrpc.[ch]
 
-See the individual files for how to implement new targets and block managers.
+See the individual files for how to implement new targets and media managers.
 
 
 
