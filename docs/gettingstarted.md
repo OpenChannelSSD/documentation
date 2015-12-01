@@ -86,15 +86,13 @@ this creates a zeroed 1GB file called "blknvme". From there, you can boot your f
     -hda YourLinuxVMFile -append "root=/dev/sda1"
     -kernel "/home/foobar/git/linux/arch/x86_64/boot/bzImage"
     -drive file=blknvme,if=none,id=mynvme
-    -device nvme,drive=mynvme,serial=deadbeef,namespaces=1,lver=1,lchannels=1,nlbaf=5,lba_index=3,mdts=10
+    -device nvme,drive=mynvme,serial=deadbeef,namespaces=1,lver=1,nlbaf=5,lba_index=3,mdts=10
 
 Where you replace YourLinuxVMFile with your preinstalled Linux virtual machine. LightNVM is enabled with lver=1. The number of LightNVM channels is set to one, and the last part defines the page size to be 4K.
 
 QEMU support the following LightNVM-specific parameters:
 
     - lver=<int>       : version of the LightNVM standard to use, Default:1
-    - ltype=<nvmtype>  : Whether device is block- or byte addressable, Default:0 (block)
-    - lchannels=<int>    : Number of channels per namespace, Default: 4
     - lreadl2ptbl=<int>  : Load logical to physical table. 1: yes, 0: no. Default: 1
     - lbbtable=<file>    : Load bad block table from file destination (Provide path to file. If no file is provided a bad block table will be generation. Look at lbbfrequency. Default: Null (no file).
     - lbbfrequency:<int> : Bad block frequency for generating bad block table. If no frequency is provided LNVM_DEFAULT_BB_FREQ will be used.
@@ -103,7 +101,7 @@ The list of LightNVM parameters in QEMU can be found in `$QUEMU_DIR/hw/block/nvm
 
 # Add target on top of device
 
-After the modified kernel is booted and the null_nvm module is
+After the modified kernel is booted and the null_blk module is
 loaded, a target is ready to be initialized on top. Use the following command to
 initialize a target (FTL):
 
