@@ -21,7 +21,7 @@ flash storage, while keeping a subset of the internal features of traditional
 SSDs. The responsibilities that are delegated to the host depend entirely on the
 device capabilities.
 
-![Figure 1](img/LightNVMArch.png)
+![Figure 1](img/LightNVMArch.pdf)
 
 
 The Linux host architecture for Open-channel SSDs is depicted in Figure 1.
