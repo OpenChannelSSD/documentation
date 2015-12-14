@@ -17,13 +17,13 @@ initialize a target (FTL):
 
     echo "a $DEVICE $TARGET_NAME $TARGET_TYPE %LUN_BEGIN:%LUN_END" > /sys/module/lnvm/parameters/configure_debug
 
-$DEVICE: Backend device. Use cat /sys/module/lnvm/parameter/configure_debug to
+1. $DEVICE: Backend device. Use cat /sys/module/lnvm/parameter/configure_debug to
 see the available devices.
-$TARGET_NAME: Name of the target to be exposed -> /dev/$TARGET_NAME
-$TARGET_TYPE: Target type. Targets need to be compiled individually before they
+2. $TARGET_NAME: Name of the target to be exposed -> /dev/$TARGET_NAME
+3. $TARGET_TYPE: Target type. Targets need to be compiled individually before they
 can be instantiated at run-time. For now, rrpc is the only available target.
-$LUN_BEGIN: Lower bound of the LUN range allocated to the target.
-$LUN_END: Higher bound of the LUN range allocated to the target.
+4. $LUN_BEGIN: Lower bound of the LUN range allocated to the target.
+5. $LUN_END: Higher bound of the LUN range allocated to the target.
 
 After successfully registering the target. You may issue reads and writes to
 /dev/$TARGET_NAME
