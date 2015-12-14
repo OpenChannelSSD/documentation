@@ -3,18 +3,22 @@ Open-Channel SSDs are devices that share responsibilities with the host in order
 to implement and maintain features that typical SSDs keep strictly in firmware.
 These include (i) the Flash Translation Layer (FTL), (ii) bad block management,
 and (iii) dedicated hardware units such as the flash controller, the interface
-controller, and large amounts of flash chips. The motivation behind moving
-certain responsibilities to the host is to make I/O data commands predictable
-from the host-side. In this way, the device enables the host to adapt the FTL
-algorithms and optimizations to match the appropriate user workloads that it
-executes.
+controller, and large amounts of flash chips.
+
+The motivation behind moving certain responsibilities to the host is to make I/O
+data commands predictable from the host-side. In this way, the device enables
+the host to adapt the FTL algorithms and optimizations to match the appropriate
+user workloads that it executes. This enables to adapt the behavior of the FTL
+managing one or several SSDs directly in software, making it possible for the
+device to adapt to changing workloads. This contrasts the current model,where
+SSDs vendor firmware updates are required.
 
 An example of a shared responsibility configuration is the following: The host
 manages data placement, garbage collection, and has knowledge about the parallel
 units within the device to schedule and manage I/O streams. The device manages
 bad blocks and maintains the mapping tables. The device implements hardware
 extensions to support atomic IOs and metadata persistence too. These are exposed
-to the host through a common interface. 
+to the host through a common interface.
 
 The baseline is that Open-channels SSD expose direct access to their physical
 flash storage, while keeping a subset of the internal features of traditional
