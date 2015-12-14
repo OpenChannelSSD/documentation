@@ -6,7 +6,8 @@ pages:
  - Introduction: index.md
  - User Documentation:
      - 'Getting Started': gettingstarted.md
-     - 'Commands': commands.md
+     - 'LightNVM Admin. Tool': commands.md
+     - 'Debugging Interface' : debug.md
  - Developer Documentation:
      - 'Projects': projects.md
      - 'Specification': specification.md

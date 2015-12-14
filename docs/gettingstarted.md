@@ -140,8 +140,11 @@ nvme0n1:
 
 	echo "a nvme0n1 test rrpc 0:0 > /sys/module/lnvm/parameters/configure_debug
 
-Note that "a" corresponds to the command "add". For a complete list of available
-commands and their outputs, see User Documentation > Commands.
+Note that "a" corresponds to the command "add".
+
+For a complete list of available commands and their outputs,
+see User Documentation > Commands. For a description of LightNVM's debug
+interface see User Documentation > Debug Interface.
 
 # Common Problems
 
