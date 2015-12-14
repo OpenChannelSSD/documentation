@@ -1,18 +1,70 @@
 # Open-Channel Solid State Drives
+Open-Channel SSDs are devices that share responsibilities with the host in order
+to implement and maintain features that typical SSDs keep strictly in firmware.
+These include (i) the Flash Translation Layer (FTL), (ii) bad block management,
+and (iii) dedicated hardware units such as the flash controller, the interface
+controller, and large amounts of flash chips. The motivation behind moving
+certain responsibilities to the host is to make I/O data commands predictable
+from the host-side. In this way, the device enables the host to adapt the FTL
+algorithms and optimizations to match the appropriate user workloads that it
+executes.
 
-An Open-Channel Solid State Drive is an SSD that exposes the physical flash storage through the logical address space, while keeping a subset of the internal features of common SSDs. 
+An example of a shared responsibility configuration is the following: The host
+manages data placement, garbage collection, and has knowledge about the parallel
+units within the device to schedule and manage I/O streams. The device manages
+bad blocks and maintains the mapping tables. The device implements hardware
+extensions to support atomic IOs and metadata persistence too. These are exposed
+to the host through a common interface. 
 
-A common SSD consists of a flash translation layer (FTL), bad block management, and dedicated hardware units such as a flash controller and a host interface controller, bundled together with a large amount of flash chips.
-
-Open-channel SSDs moves part or all of the FTL responsibility into the host system. This allows the host to manage data placement, garbage collection, and parallelism on behalf of the SSD. To not move everything into the host, the device may continue to maintain information about bad blocks and implement a simpler FTL that allows extensions such as atomic IOs, metadata persistence and other features to be accelerated.
-
-The Linux host architecture for Open-channel SSDs, depicted in Figure 1, consists of device driver integration,  multiple block managers and multiple targets and a core. To initialize an open-channel SSD, a storage protocol, such as NVMe, is extended with identify structures and custom command set. That allows the host to enumerate the available features, extensions and hardware of the device and issue I/Os directly to the physical media.
+The baseline is that Open-channels SSD expose direct access to their physical
+flash storage, while keeping a subset of the internal features of traditional
+SSDs. The responsibilities that are delegated to the host depend entirely on the
+device capabilities.
 
 ![Figure 1](img/LightNVMArch.png)
 
 
-The block manager handles flash block information on disk. A block manager is different for which types of features and extensions that an SSD supports. For example, a host-based open-channel SSD requires maintaining a metadata file-system, while a hybrid SSD, which may implement block management, lets the block manager read the block management information from disk.
+The Linux host architecture for Open-channel SSDs is depicted in Figure 1.
+It consists of four fundamental components: LightNVM compatible device driver,
+framework manager, media manager, and targets.
 
-Targets implement the translation logic, data placement, garbage collection routines and so forth. The target may then choose to export the address space is various ways. Such as a block device, key-value store, or object store. By dividing the responsibility between block management, and data placement and garbage collection. The target is decoupled from the underlying media and thereby allows multiple vendors to provide hardware and allows the target to cover multiple disk and create a single address space across all media available. 
+- LightNVM device driver. The device driver is responsible for implementing the
+  storage protocol use for communication between host and SSD. A device driver
+  instance is created for each connected Open-Channel SSD. It relies on the
+  Linux block manager to handle command submission/completion, timeouts, and
+  tags. Currently, LightNVM uses NVMe, which is extended with (i) identify
+  device structures, used by the host to discover the available features,
+  extensions, and characteristics of the device; and (ii) and a series of
+  custom commands, which enables the host to issue I/O commands that act
+  directly on the physical media.
 
-The core acts as a mediator between device drivers, block managers and targets. The core implements functionality shared across targets, such as initialization, teardown and performance counters.
+- Framework Manager. The framework management acts as a mediator between device
+  drivers, media managers and targets. It provides supporting functionalities
+  for device initialization, teardown or accounting.
+
+- Media Manager. The media manager abstracts the underlying physical media by
+  hiding its constraints and access details. It is responsible for (i) name
+  mapping between vendor specific and generic addressing format, (ii)
+  device-specific SSD state management, and (iii) recovery – to guarantee
+  durability when manipulating the metadata associated with SSD state
+  management. Each media manager implementation can vary much depending on the
+  needs of upper layer it is exposed to. LightNVM’s generic media manager
+  implements minimal block management and let targets or user space applications
+  implement the actual FTL. Still, it is possible for a media managers to
+  implement the whole FTL and manage user space interfaces. For example, a media
+  manager could expose a block device similar to a traditional block storage
+  device. Such a media manager would manage functionalities such as data
+  placement, garbage collection and block management.
+
+- LightNVM Targets. When using the generic media manager, targets implement FTL
+  functionality (e.g., translation logic, data placement, or garbage
+  collection). They also expose a storage interface to user space. Examples of
+  such interfaces include block devices, and key-value stores, or object stores.
+  Custom interfaces can also be implemented. Target and device (media manager)
+  division, grouping and assignments are flexible in such a way that one device
+  can be split and assigned into multiple targets or multiple devices can belong
+  to one target.
+
+Additionally, LightNVM connects to user space through liblightnvm, which exposes
+a get_block/put_block interface for applications to implement their own FTLs.
+
