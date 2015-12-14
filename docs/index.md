@@ -28,7 +28,8 @@ The Linux host architecture for Open-channel SSDs is depicted in Figure 1.
 It consists of four fundamental components: LightNVM compatible device driver,
 framework manager, media manager, and targets.
 
-- LightNVM device driver. The device driver is responsible for implementing the
+## LightNVM device driver
+  The device driver is responsible for implementing the
   storage protocol use for communication between host and SSD. A device driver
   instance is created for each connected Open-Channel SSD. It relies on the
   Linux block manager to handle command submission/completion, timeouts, and
@@ -38,11 +39,13 @@ framework manager, media manager, and targets.
   custom commands, which enables the host to issue I/O commands that act
   directly on the physical media.
 
-- Framework Manager. The framework management acts as a mediator between device
+## Framework Manager
+  The framework management acts as a mediator between device
   drivers, media managers and targets. It provides supporting functionalities
   for device initialization, teardown or accounting.
 
-- Media Manager. The media manager abstracts the underlying physical media by
+## Media Manager
+  The media manager abstracts the underlying physical media by
   hiding its constraints and access details. It is responsible for (i) name
   mapping between vendor specific and generic addressing format, (ii)
   device-specific SSD state management, and (iii) recovery – to guarantee
@@ -56,7 +59,8 @@ framework manager, media manager, and targets.
   device. Such a media manager would manage functionalities such as data
   placement, garbage collection and block management.
 
-- LightNVM Targets. When using the generic media manager, targets implement FTL
+## LightNVM Targets
+  When using the generic media manager, targets implement FTL
   functionality (e.g., translation logic, data placement, or garbage
   collection). They also expose a storage interface to user space. Examples of
   such interfaces include block devices, and key-value stores, or object stores.
