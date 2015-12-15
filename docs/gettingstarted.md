@@ -1,8 +1,7 @@
 # How to use
 
 Open-Channel SSDs require support in the kernel. LightNVM, the kernel subsystem
-enabling such support is part of the vanilla Linux Kernel from 4.4+. The latests
-source code can be found in the Open-Channel SSD project in Github (see below).
+enabling such support is part of the vanilla Linux Kernel from 4.4+. The latest source code is available at the Open-Channel SSD project in Github (see below).
 
 After booting the kernel. To enable LightNVM, the following must be met:
 
