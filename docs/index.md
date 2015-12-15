@@ -10,7 +10,7 @@ data commands predictable from the host-side. In this way, the device enables
 the host to adapt the FTL algorithms and optimizations to match the appropriate
 user workloads that it executes. This enables to adapt the behavior of the FTL
 managing one or several SSDs directly in software, making it possible for the
-device to adapt to changing workloads. This contrasts the current model,where
+device to adapt to changing workloads. This contrasts the current model, where
 SSDs vendor firmware updates are required.
 
 An example of a shared responsibility configuration is the following: The host
