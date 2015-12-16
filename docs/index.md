@@ -12,13 +12,13 @@ The baseline is that Open-channels SSD exposes direct access to their physical f
 
 In Figure 1, the Linux host architecture for Open-channel SSDs is depicted. It consists of four fundamental components: LightNVM compatible device driver, framework manager, media manager, and targets.
 
-## Device drivers
+## Device Drivers
 The device drivers are responsible for implementing the storage protocol use for communication between host and SSD. The protocol includes (i) identify device structure, used by the host to discover its geometry. (ii) A series of commands that enables direct access to the non-volatile memory attached. The Linux kernel NVMe and null_blk driver currently supports the protocol.
 
 ## Media Managers
 The media manager abstracts the underlying physical media by hiding its constraints and access details. It is responsible for (i) name mapping between vendor specific and generic addressing format, (ii) device-specific SSD state management, and (iii) recovery – to guarantee durability when manipulating the metadata associated with SSD state management. Each media manager implementation can vary much depending on the needs of layers above. LightNVM’s generic media manager implements block management and lets targets or user space applications implement the actual FTL. Still, it is possible for a media managers to implement the entire FTL and manage userspace interfaces. For example, a media manager could expose a block device similar to a traditional block storage device. Such a media manager would manage functionalities such as data placement, garbage collection, and block management.
 
-## LightNVM Targets
+## Targets
 When using the generic media manager, targets implement FTL functionality (e.g., translation logic, data placement, or garbage collection). They also expose a storage interface to user space. Examples of such interfaces include block devices, key-value stores, or object stores. Target and device (media manager) division, grouping and assignments are flexible in such a way that one device can be split and assigned to multiple targets or multiple devices can belong to one target.
 
 Additionally, LightNVM connects to user space through liblightnvm, which exposes a get_block/put_block interface for applications to implement their own FTLs.
@@ -26,5 +26,5 @@ Additionally, LightNVM connects to user space through liblightnvm, which exposes
 Additionally, LightNVM connects to user space through liblightnvm, which exposes
 a get_block/put_block interface for applications to implement their own FTLs.
 
-## Framework Manager
-The framework management acts as a mediator between device drivers, media managers, and targets. It provides supporting functionalities for device initialization, teardown or accounting.
+## LightNVM Management
+The  management acts as a mediator between device drivers, media managers, and targets. It provides supporting functionalities for device initialization, teardown or accounting.
