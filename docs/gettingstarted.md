@@ -41,7 +41,7 @@ Compile the kernel and install using the guide for your distribution.
 
 Check out the management tool source at:
 
-   `git clone https://github.com/OpenChannelSSD/lightnvm-adm.git`
+   `git clone https://github.com/OpenChannelSSD/lnvm.git`
 
 The tool can then be installed (into /usr/local/bin) by
 
