@@ -6,7 +6,7 @@ The Open-Channel SSD architecture is divided into several pieces. Here is a shor
    
 
    - **LightNVM Management Tool**
-     ([https://github.com/OpenChannelSSD/lightnvm-adm](https://github.com/OpenChannelSSD/lightnvm-adm))
+     ([https://github.com/OpenChannelSSD/lightnvm-adm](https://github.com/OpenChannelSSD/lnvm))
      <br>
       Implements a management tool for managing the Open-Channel SSDs.
    
