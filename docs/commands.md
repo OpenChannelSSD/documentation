@@ -2,7 +2,7 @@
 
 LightNVM can be interfaced through lightnvm-adm, an admin tool to manage create,
 delete, and manage LightNVM targets and devices. As for today, the tool is
-available in Github (https://github.com/OpenChannelSSD/lightnvm-adm). To install
+available in Github (https://github.com/OpenChannelSSD/lnvm). To install
 it:
 
 	make; sudo make install
