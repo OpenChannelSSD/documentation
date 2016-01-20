@@ -1,37 +1,38 @@
-# LightNVM admin tool
+LightNVM can be interfaced through the lightnvm cli tool (lnvm). It allows you to create,
+delete, and manage LightNVM targets and devices. 
 
-LightNVM can be interfaced through lightnvm-adm, an admin tool to manage create,
-delete, and manage LightNVM targets and devices. As for today, the tool is
-available in Github (https://github.com/OpenChannelSSD/lnvm). To install
-it:
+lnvm can easily be installed on Ubuntu by adding the LightNVM PPA repository and install its package:
 
+    add-apt-repository ppa:lightnvm/ppa
+    sudo apt-get update
+    sudo apt-get install lnvm
+
+If you are not running Ubuntu or wish to compile from source. It is also available on Github (https://github.com/OpenChannelSSD/lnvm)
+
+	git clone https://github.com/OpenChannelSSD/lnvm.git
+	cd lnvm
 	make; sudo make install
 
-Packages for different Linux distros are work in progress.
-
-To show help
+After lnvm has neen installed, its commands can be listed with:
 
 	lnvm --help
 
 # List devices and targets
 Supported devices register with LightNVM upon initialization. To list registered
-devices use the following command:
+devices:
 
     lnvm devices
 
-Targets and their versions are listed with
+To list Targets and associated versions:
 
     lnvm info
 
-# Add target on top of device
-Targets are initialized on top of a device. Use the following command to
-initialize a target (FTL):
+To add a target on top of a device registered with the gennvm media manager:
 
     lnvm create -d $DEVICE -n $TARGET_NAME -t $TARGET_TYPE -o
     $LUN_BEGIN:$LUN_END
 
-1. $DEVICE: Backend device. Use cat /sys/module/lnvm/parameter/configure_debug to
-see the available devices.
+1. $DEVICE: Backend device. lnvm devices to list available devices.
 2. $TARGET_NAME: Name of the target to be exposed -> /dev/$TARGET_NAME
 3. $TARGET_TYPE: Target type. Targets need to be compiled individually before they
 can be instantiated at run-time. For now, rrpc is the only available target.
@@ -44,9 +45,8 @@ After successfully registering the target. You may issue reads and writes to
 For example, to allocate LUN 0 to target tests using rrpc in the NVMe device
 nvme0n1:
 
-    lnvm create -d nvme0n1 -n test -t rrpc -o 0:0
+    lnvm create -d nvme0n1 -n mydevice -t rrpc -o 0:0
 
-# Delete target
-An instance of a target is deleted by:
+A target instance are removed again by:
 
-    lnvm remove test
+    lnvm remove mydevice
