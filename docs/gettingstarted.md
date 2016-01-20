@@ -34,6 +34,14 @@ Instantiate the module with the following parameters
 
 `use_lightnvm=1 gb=4`
 
+For example:
+
+`modprobe null_blk use_lightnvm=1 gb=4`
+
+or append to your kernel parameters on booting:
+
+`null_blk.use_lightnvm=1 null_blk.gb=4`
+
 That will instantiate the LightNVM driver with a 4GB SSD. You can see that it
 was instantiated by checking the kernel log.
 
