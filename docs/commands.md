@@ -3,8 +3,7 @@ delete, and manage LightNVM targets and devices.
 
 lnvm can easily be installed on Ubuntu by adding the LightNVM PPA repository and install its package:
 
-    add-apt-repository ppa:lightnvm/ppa
-    sudo apt-get update
+    sudo add-apt-repository ppa:lightnvm/ppa; sudo apt-get update
     sudo apt-get install lnvm
 
 If you are not running Ubuntu or wish to compile from source. It is also available on Github (https://github.com/OpenChannelSSD/lnvm)
