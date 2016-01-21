@@ -12,3 +12,4 @@ pages:
      - 'Projects': projects.md
      - 'Specification': specification.md
      - 'Source files': source.md
+     - 'Kernel API': api.md
