@@ -16,7 +16,7 @@ After lnvm has neen installed, its commands can be listed with:
 
 	lnvm --help
 
-# List devices and targets
+To list devices and targets
 Supported devices register with LightNVM upon initialization. To list registered
 devices:
 
