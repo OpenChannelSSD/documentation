@@ -15,11 +15,11 @@ layers can use to allocate into the SSD address space.
 space. The target can expose a traditional block I/O interface, or more esoteric
 interfaces such as key-value stores, object-stores, etc.
 
-# Install compatible kernel
+## Install compatible kernel
 
 A guide to installing a 4.4 kernel in Ubuntu is found here: http://linuxdaddy.com/blog/install-kernel-4-4-on-ubuntu/
 
-# Install lnvm tool
+## Install lnvm tool
 
 lnvm can easily be installed on Ubuntu by adding the LightNVM PPA repository and install its package:
 
@@ -28,7 +28,7 @@ lnvm can easily be installed on Ubuntu by adding the LightNVM PPA repository and
     
 If you are not running Ubuntu, please see the Command Line section for how to install from source.
 
-# Instantiate with the null_blk driver
+## Instantiate with the null_blk driver
 
 Instantiate the module with the following parameters
 
@@ -51,11 +51,11 @@ where the output should be similar to
 
     [    2.120740] nvm: registered nulln0 with luns: 1 blocks: 2048 sector size: 4096
 
-# Instantiate with NVMe using QEMU
+## Instantiate with NVMe using QEMU
 
 Using Keith Busch's QEMU branch, it is possible to expose a LightNVM-compatible device using a backend-file. See the guide below for installing his version.
 
-## Configure QEMU
+### Configure QEMU
 
 Create an empty file to hold your NVMe device.
 
@@ -81,7 +81,7 @@ QEMU support the following LightNVM-specific parameters:
 
 The list of LightNVM parameters in QEMU can be found in `$QUEMU_DIR/hw/block/nvme.c` at the _Advanced optional options_ comment.
 
-# Instantiate media manager and target
+## Instantiate media manager and target
 
 When the installation is finished and the kernel have been booted. Devices can be enumerated by:
 
@@ -95,9 +95,9 @@ Assuming nullb0 was shown during "lnvm devices", it will then expose /dev/mydevi
 
 That's it! 
 
-# Source install
+## Source install
 
-## Compile latest kernel
+### Compile latest kernel
 
 The latest LightNVM can be found at:
 
@@ -121,7 +121,7 @@ Make sure that the .config file at least includes:
 
 Compile the kernel and install using the guide for your distribution.
 
-## QEMU Installation
+### QEMU Installation
 
 QEMU support for Open-Channel SSDs is based on top of Keith Busch's qemu-nvme
 branch, which implements an NVMe compatible device.
