@@ -33,14 +33,16 @@ This includes documentation on the following functions
       nvm_submit_ppa - Submits a list of ppas to device synchronously.
       nvm_end_io - Complete a nvm_rq request
 
-Please see the each functions documentation separately for their parameters and description.
+Please see the each function documentation for its parameters and description.
 
 Examples of how to invoke the APIs is found in
 
     Media manager
       gennvm - /drivers/lightnvm/gennvm.c
+      
     Target
       rrpc - /drivers/lightnvm/rrpc.c
+      
     Device-side
       NVMe - /drivers/nvme/host/lightnvm.c
       null_blk - /drivers/block/null_blk.c
