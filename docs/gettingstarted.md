@@ -17,7 +17,7 @@ interfaces such as key-value stores, object-stores, etc.
 
 ## Install Kernel 4.4+
 
-LightNVM is directly supported in Linux kernel 4.4+. If you don't have a 4.4 kernel installed, you can follow the guide at: http://linuxdaddy.com/blog/install-kernel-4-4-on-ubuntu/ to install.
+LightNVM is directly supported in Linux kernel 4.4+. If you don't have a 4.4 kernel installed, you can follow the guide at: [http://linuxdaddy.com/blog/install-kernel-4-4-on-ubuntu/](http://linuxdaddy.com/blog/install-kernel-4-4-on-ubuntu/) to install.
 
 ## Install lnvm tool
 
