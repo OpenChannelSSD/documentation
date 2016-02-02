@@ -15,9 +15,9 @@ layers can use to allocate into the SSD address space.
 space. The target can expose a traditional block I/O interface, or more esoteric
 interfaces such as key-value stores, object-stores, etc.
 
-## Install compatible kernel
+## Install Kernel 4.4+
 
-A guide to installing a 4.4 kernel in Ubuntu is found here: http://linuxdaddy.com/blog/install-kernel-4-4-on-ubuntu/
+LightNVM is directly supported in Linux kernel 4.4+. If you don't have a 4.4 kernel installed, you can follow the guide at: http://linuxdaddy.com/blog/install-kernel-4-4-on-ubuntu/ to install.
 
 ## Install lnvm tool
 
