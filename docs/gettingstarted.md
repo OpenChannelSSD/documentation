@@ -49,7 +49,8 @@ was instantiated by checking the kernel log.
 
 where the output should be similar to
 
-    [    2.120740] nvm: registered nulln0 with luns: 1 blocks: 2048 sector size: 4096
+    [ 4366.229941] nvm: registered nullb0 [1/1/256/4096/1/1]
+    [ 4366.229982] nvm: registered nullb1 [1/1/256/4096/1/1]
 
 ## Instantiate with NVMe using QEMU
 
@@ -64,7 +65,7 @@ Create an empty file to hold your NVMe device.
 this creates a zeroed 1GB file called "blknvme". You can boot your favorite
 Linux image with
 
-    qemu-system-x86_64 -m 4G -smp 1,cores=4 --enable-kvm
+    qemu-system-x86_64 -m 4G -smp 1 --enable-kvm
     -hda $LINUXVMFILE -append "root=/dev/sda1"
     -kernel "/home/foobar/git/linux/arch/x86_64/boot/bzImage"
     -drive file=blknvme,if=none,id=mynvme
@@ -115,7 +116,7 @@ Make sure that the .config file at least includes:
     # generic media manager support (required)
     CONFIG_NVM_GENNVM=y
     # For null_blk support
-    CONFIG_BLK_DEV_NULL=y
+    CONFIG_BLK_DEV_NULL_BLK=y
     # For NVMe support
     CONFIG_BLK_DEV_NVME=y
 
