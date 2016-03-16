@@ -7,7 +7,7 @@ The Open-Channel SSD architecture is divided into several pieces. Here is a shor
    - **LightNVM Management Tool**
      ([https://github.com/OpenChannelSSD/lnvm](https://github.com/OpenChannelSSD/lnvm))
      <br>
-      Provides the `lnvn` cli management tool for managing the Open-Channel SSDs.
+      Provides the `lnvm` cli management tool for managing the Open-Channel SSDs.
    
    - **RocksDB Open-Channel SSD Support**
      ([https://github.com/OpenChannelSSD/rocksdb](https://github.com/OpenChannelSSD/rocksdb))<br>
