@@ -90,6 +90,7 @@ When the installation is finished and the kernel have been booted. Devices can b
    
 and initialized by:
 
+    sudo lnvm init -d nullb0
     sudo lnvm create -d nullb0 -t mydevice
     
 Assuming nullb0 was shown during "lnvm devices", it will then expose /dev/mydevice as a block device using it as the backend. 
