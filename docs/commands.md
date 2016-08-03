@@ -25,6 +25,10 @@ devices:
 To list Targets and associated versions:
 
     lnvm info
+    
+A device must first have a media registered when it is first used:
+
+    lnvm init -d $DEVICE
 
 To add a target on top of a device registered with the gennvm media manager:
 
@@ -48,4 +52,4 @@ nvme0n1:
 
 A target instance are removed again by:
 
-    lnvm remove mydevice
+    lnvm remove targetname
