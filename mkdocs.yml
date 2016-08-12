@@ -8,6 +8,7 @@ pages:
      - 'Getting Started': gettingstarted.md
      - 'Command Line': commands.md
      - 'Debugging Interface' : debug.md
+     - 'Available Hardware' : hardware.md
  - Developer Documentation:
      - 'Projects': projects.md
      - 'Specification': specification.md
