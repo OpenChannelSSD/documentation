@@ -1,3 +1,6 @@
-An Open-Channel SSD must support the Open-Channel SSD specification. The specification can be accessed [here](http://goo.gl/BYTjLI).
 
-Feel free to add comments.
+A LightNVM compatiblity Open-Channel SSD supports the following specification:
+
+[LightNVM Open-Channel Specification 1.2 Final](http://lightnvm.io/docs/Open-ChannelSSDInterfaceSpecification12-final.pdf)
+
+ Latest draft can be found [here](http://goo.gl/BYTjLI).
