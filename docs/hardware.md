@@ -1,8 +1,12 @@
 Available hardware:
 
-  - CNEX Labs Westlake SDK
+  - CNEX Labs LightNVM SDK
     ([Website](http://www.cnexlabs.com))
+    LightNVM SDK may be ordered for academical purposes. Please write to matias@cnexlabs.com with your research description and   inquire for availability
     
+  - EMC Dragon Fire Board Open-Channel OX Controller
+    ([Website](https://github.com/DFC-OpenSource/ox-ctrl))
+   
   - Radian Memory Systems RMS-325
     ([Website](http://www.radianmemory.com/edge-card-ssd-rms-325/))
     
