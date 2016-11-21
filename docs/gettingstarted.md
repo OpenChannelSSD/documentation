@@ -1,58 +1,45 @@
 # How to use
 
-Open-Channel SSDs require support in the kernel. LightNVM, the kernel subsystem
-enabling such support is part of the vanilla Linux Kernel from 4.4+. The latest source code is available at the Open-Channel SSD project in Github (see below).
+To use Open-Channel SSDs, support in the operating system kernel is required. Support in the Linux kernel has been supported since 4.4 with the inclusion of the LightNVM subsystem. The project is still under development, therefore the latest release or release candidate is preferred. The latest source code is available at [https://github.com/OpenChannelSSD/linux](Github).
 
-After booting the kernel. To enable LightNVM, the following must be met:
+After booting the a supported kernel. The following must be met:
 
-1. A compatible device driver that is registered with LightNVM. For example
-null_blk, QEMU NVMe or an Open-Channel SSD, such as the CNEX Labs Westlake SDK.
-2. An initialized media manager on top of the device driver. Note that LightNVM
-provides a generic media manager. The media manager maintains a list of
-free/in-use/bad blocks on media and exposes a get/put block API that upper
-layers can use to allocate into the SSD address space.
-3. An initialized target on top of the block manager that exposes the SSD address
-space. The target can expose a traditional block I/O interface, or more esoteric
-interfaces such as key-value stores, object-stores, etc.
+1. A compatible device, such as QEMU NVMe or an Open-Channel SSD, such as the CNEX Labs LightNVM SDK.
+2. A media manager on top of the device driver. The media manager manages the partition table for the device.
+3. A target on top of the block manager that exposes the Open-Channel SSD.
 
 ## Install Kernel 4.4+
 
-LightNVM is directly supported in Linux kernel 4.4+. If you don't have a 4.4 kernel installed, you can follow the guide at: [http://linuxdaddy.com/blog/install-kernel-4-4-on-ubuntu/](http://linuxdaddy.com/blog/install-kernel-4-4-on-ubuntu/) to install.
+LightNVM is directly supported in Linux kernel 4.4+. If you don't have a 4.4 kernel or later installed, you can follow the guide at: [http://linuxdaddy.com/blog/install-kernel-4-4-on-ubuntu/](http://linuxdaddy.com/blog/install-kernel-4-4-on-ubuntu/) to install.
 
-## Install lnvm tool
+## Install nvme-cli tool
 
-lnvm can easily be installed on Ubuntu by adding the LightNVM PPA repository and install its package:
+nvme-cli is the tool used to administrate nvme devices. It can be installed using
 
-    sudo add-apt-repository ppa:lightnvm/ppa; sudo apt-get update
-    sudo apt-get install lnvm
+    sudo apt-get install nvme-cli
     
-If you are not running Ubuntu, please see the Command Line section for how to install from source.
+or installed from [https://github.com/linux-nvme/nvme-cli](Github)
+    
+If you are not running Ubuntu, please see the nvme-cli github project for instructions.
 
-## Instantiate with the null_blk driver
+## Using Open-Channel SSD hardware
 
-Instantiate the module with the following parameters
+If you have a LightNVM SDK from CNEX Labs, or another Open-Channel SSD, you should be able to see the device using
 
-`use_lightnvm=1 gb=4`
+    sudo nvme lnvm list
+    
+which should output the following:
 
-For example:
+    nvme lnvm list
+    Number of devices: 1
+    Device      	Block manager	Version
+    nvme0n1     	gennvm      	(0,1,0)
+    
+If block manager reports none, the device should be first initialized using
 
-`modprobe null_blk use_lightnvm=1 gb=4`
-
-or append to your kernel parameters on booting:
-
-`null_blk.use_lightnvm=1 null_blk.gb=4`
-
-That will instantiate the LightNVM driver with a 4GB SSD. You can see that it
-was instantiated by checking the kernel log.
-
-`dmesg |grep nvm`
-
-where the output should be similar to
-
-    [ 4366.229941] nvm: registered nullb0 [1/1/256/4096/1/1]
-    [ 4366.229982] nvm: registered nullb1 [1/1/256/4096/1/1]
-
-## Instantiate with NVMe using QEMU
+    sudo nvme lnvm init -d nvme0n1
+    
+## Using QEMU
 
 Using Keith Busch's QEMU branch, it is possible to expose a LightNVM-compatible device using a backend-file. See the guide below for installing his version.
 
@@ -76,9 +63,7 @@ Here, replace $LINUXVMFILE with your pre-installed Linux virtual machine.
 QEMU support the following LightNVM-specific parameters:
 
     - lver=<int>       : version of the LightNVM standard to use, Default:1
-    - lreadl2ptbl=<int>  : Load logical to physical table. 1: yes, 0: no. Default: 1
     - lbbtable=<file>    : Load bad block table from file destination (Provide path to file. If no file is provided a bad block table will be generation. Look at lbbfrequency. Default: Null (no file).
-    - lbbfrequency:<int> : Bad block frequency for generating bad block table. If no frequency is provided LNVM_DEFAULT_BB_FREQ will be used.
 
 The list of LightNVM parameters in QEMU can be found in `$QUEMU_DIR/hw/block/nvme.c` at the _Advanced optional options_ comment.
 
@@ -86,22 +71,20 @@ The list of LightNVM parameters in QEMU can be found in `$QUEMU_DIR/hw/block/nvm
 
 When the installation is finished and the kernel have been booted. Devices can be enumerated by:
 
-    sudo lnvm devices
+    sudo nvme lnvm list
    
 and initialized by:
 
-    sudo lnvm init -d nullb0
-    sudo lnvm create -d nullb0 -t mydevice
+    sudo nvme lnvm init -d nvme0n1
+    sudo nvme lnvm create -d nvme0n1 --lun-begin=0 --lun-end=3 -n mydevice -t pblk
     
-Assuming nullb0 was shown during "lnvm devices", it will then expose /dev/mydevice as a block device using it as the backend. 
-
-That's it! 
+Assuming nvme0n1 was shown during "nvme lnvm list", it will then expose /dev/mydevice as a block device using it as the backend. Please note that pblk is only available at the Linux kernel Github repository, and it yet to be upstream.
 
 ## Source install
 
 ### Compile latest kernel
 
-The latest LightNVM can be found at:
+The latest LightNVM kernel can be found at:
 
    `git clone https://github.com/OpenChannelSSD/linux.git`
 
@@ -112,12 +95,12 @@ Make sure that the .config file at least includes:
     CONFIG_NVM=y
     # Expose the /sys/module/lnvm/parameters/configure_debug interface
     CONFIG_NVM_DEBUG=y
-    # Hybrid target support (required to expose the open-channel SSD as a block device)
-    CONFIG_NVM_RRPC=y
+    # Target support (required to expose the open-channel SSD as a block device)
+    CONFIG_NVM_PBLK=y
+    # Do not perform recovery upon boot (Disables recovery of the mapping table upon boot. Disable when using across boots)
+    CONFIG_NVM_PBLK_NO_RECOV=y
     # generic media manager support (required)
     CONFIG_NVM_GENNVM=y
-    # For null_blk support
-    CONFIG_BLK_DEV_NULL_BLK=y
     # For NVMe support
     CONFIG_BLK_DEV_NVME=y
 
