@@ -13,4 +13,4 @@ Available hardware:
   - LiteOn AD2 Open-Channel SSD
     ([Announcement](http://www.storagenewsletter.com/rubriques/solid-state-ssd-flash-key/lite-on-storage-to-show-several-ssd-solutions-at-fms/))  
 
-  Other drives are currently under developent. They are added when announched.
+  Other drives are currently under development. They are added when announched.
