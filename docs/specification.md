@@ -1,6 +1,6 @@
 
 A LightNVM compatiblity Open-Channel SSD supports the following specification:
 
-[LightNVM Open-Channel NVMe Specification 1.2 Final](http://lightnvm.io/docs/Open-ChannelSSDInterfaceSpecification12-final.pdf)
+[LightNVM Open-Channel NVMe Specification 1.2](http://bit.ly/2gfidpQ)
 
- Latest draft can be found [here](http://goo.gl/BYTjLI).
+[LightNVM Open-Channel NVMe Specification 1.3 Draft](http://bit.ly/2f61fyc)
