@@ -12,4 +12,4 @@ By integrating the SSD flash translation layer into the host, workload optimizat
 
 Figure 1 shows the division of responsibility between the host and SSD. The host implements generic FTL functionality in the host: data placement, I/O scheduling and GC; and exposes a traditional block device to user space. Media-centric metadata, error handling, scrubbing and wear-leveling are handled by the controller. In this way, the host can manage tradeoffs related to throughput, latency, power consumption and capacity. This division of labor between the SSD and host makes it possible to an Open-Channel SSD to abstract the actual media, while allowing the host to have control over all I/Os being submitted to the media.
 
-![Figure 1](img/LightNVMArch.png)
+![Figure 1](LightNVMArch.png)
