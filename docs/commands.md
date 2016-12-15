@@ -1,44 +1,38 @@
-LightNVM can be interfaced through the lightnvm cli tool (lnvm). It allows you to create,
+LightNVM can be interfaced through the nvme cli tool (nvme-cli). It allows you to create,
 delete, and manage LightNVM targets and devices. 
 
-lnvm can easily be installed on Ubuntu by adding the LightNVM PPA repository and install its package:
+lnvm can easily be installed on Ubuntu by installing the nvme-cli package
 
-    sudo add-apt-repository ppa:lightnvm/ppa; sudo apt-get update
-    sudo apt-get install lnvm
+    sudo apt-get install nvme
 
-If you are not running Ubuntu or wish to compile from source. It is also available on Github (https://github.com/OpenChannelSSD/lnvm)
+If you are not running Ubuntu or wish to compile from source. It is also available at Github (https://github.com/linux-nvme/nvme-cli)
 
-	git clone https://github.com/OpenChannelSSD/lnvm.git
-	cd lnvm
-	make; sudo make install
+After nvme cli has been installed, its commands can be listed with:
 
-After lnvm has neen installed, its commands can be listed with:
-
-	lnvm --help
+    nvme lnvm --help
 
 To list devices and targets
 Supported devices register with LightNVM upon initialization. To list registered
 devices:
 
-    lnvm devices
+    nvme lnvm list
 
-To list Targets and associated versions:
+To list available targets and their version:
 
-    lnvm info
+    nvme list info
     
-A device must first have a media registered when it is first used:
+A device must first have a media registered when it is first used (pre-4.11)
 
-    lnvm init -d $DEVICE
+    nvme lnvm init -d $DEVICE
 
 To add a target on top of a device registered with the gennvm media manager:
 
-    lnvm create -d $DEVICE -n $TARGET_NAME -t $TARGET_TYPE -o
-    $LUN_BEGIN:$LUN_END
+    nvme lnvm create -d $DEVICE -n $TARGET_NAME -t $TARGET_TYPE -b $LUN_BEGIN -e $LUN_END
 
 1. $DEVICE: Backend device. lnvm devices to list available devices.
 2. $TARGET_NAME: Name of the target to be exposed -> /dev/$TARGET_NAME
 3. $TARGET_TYPE: Target type. Targets need to be compiled individually before they
-can be instantiated at run-time. For now, rrpc is the only available target.
+can be instantiated at run-time. For now, rrpc and pblk are the available implementations.
 4. $LUN_BEGIN: Lower bound of the LUN range allocated to the target.
 5. $LUN_END: Higher bound of the LUN range allocated to the target.
 
@@ -48,8 +42,8 @@ After successfully registering the target. You may issue reads and writes to
 For example, to allocate LUN 0 to target tests using rrpc in the NVMe device
 nvme0n1:
 
-    lnvm create -d nvme0n1 -n mydevice -t rrpc -o 0:0
+    nvme lnvm create -d nvme0n1 -n mydevice -t rrpc -b 0 -e 0
 
 A target instance are removed again by:
 
-    lnvm remove targetname
+    nvme lnvm remove targetname
