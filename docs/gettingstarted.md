@@ -126,7 +126,7 @@ then install by
 
 ## Failed to open LightNVM mgmt /dev/lightnvm/control. Error: -1
 
-Either you need to run lnvm as root, or you are running an older kernel than 4.4.
+Either you need to run nvme as root, or you are running an older kernel than 4.4.
 
 ## Kernel panic on boot using NVMe
 
