@@ -4,11 +4,12 @@ repo_url: https://github.com/OpenChannelSSD/Documentation
 google_analytics: ['UA-57193430-2', 'openchannelssd.readthedocs.org']
 pages:
  - Introduction: index.md
- - User Documentation:
+ - Documentation:
      - 'Getting Started': gettingstarted.md
      - 'Command Line': commands.md
      - 'Hardware' : hardware.md
  - Developer Documentation:
+     - 'Contribute': contribute.md
      - 'Projects': projects.md
      - 'Specification': specification.md
      - 'Source files': source.md
