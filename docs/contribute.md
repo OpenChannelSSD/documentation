@@ -17,6 +17,10 @@ If you want to submit a Linux kernel patch, please follow the Linux kernel guide
 
 When submitting a patch for the Linux kernel, CC the following:
 
- * The maintainer: matias@cnexlabs.com
+ * Maintainer: matias@cnexlabs.com
  * Linux block layer list: linux-block@vger.kernel.org
  * Linux kernel mailing list: linux-kernel@vger.kernel.org
+
+# How do I introduce a new NVMe SSD that supports the Open-Channel SSD interface? #
+
+Please update the "nvme_nvm_ns_supported" function in the the /drivers/host/nvme/lightnvm.c file with the appropriate PCI vendor, device id, and detection method. After the patch have been made, feel free to submit it to the Linux kernel.
