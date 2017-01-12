@@ -1,5 +1,5 @@
 # Open-Channel Solid State Drives
-A new class of SSDs has been developed known as Open-Channel SSDs. Open-Channel SSDs differ from a traditional SSD in that they expose the internal parallelism of the SSD to the host and allows it manage it. This allows Open-Channel SSDs to provide three properties to the host: I/O isolation, predictable latencies, and oftware-defined non-volatile memory.
+A new class of SSDs has been developed known as Open-Channel SSDs. Open-Channel SSDs differ from a traditional SSD in that they expose the internal parallelism of the SSD to the host and allows it manage it. This allows Open-Channel SSDs to provide three properties to the host: I/O isolation, predictable latencies, and software-defined non-volatile memory.
 
 ## I/O Isolation 
 I/O isolation provides a method to divide the capacity of the SSD into a number of I/O channels that map the parallel units of the device (LUNs). This enables an Open-Channel SSD to be  used in multi-tenant applications without tenants interfering with each other. 
