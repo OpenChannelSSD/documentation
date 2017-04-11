@@ -1,6 +1,6 @@
 # How to use
 
-To use Open-Channel SSDs, support in the operating system kernel is required. Support in the Linux kernel has been supported since 4.4 with the inclusion of the LightNVM subsystem. The project is still under development, therefore the latest release or release candidate is preferred. The latest source code is available at [https://github.com/OpenChannelSSD/linux](Github).
+To use Open-Channel SSDs, support in the operating system kernel is required. Support in the Linux kernel has been supported since 4.4 with the inclusion of the LightNVM subsystem. The project is still under development, therefore the latest release or release candidate is preferred. The latest source code is available at [https://github.com/OpenChannelSSD/linux](https://github.com/OpenChannelSSD/linux).
 
 After booting the a supported kernel. The following must be met:
 
@@ -18,7 +18,7 @@ nvme-cli is the tool used to administrate nvme devices. It can be installed usin
 
     sudo apt-get install nvme-cli
     
-or installed from [https://github.com/linux-nvme/nvme-cli](Github)
+or installed from [https://github.com/linux-nvme/nvme-cli](https://github.com/linux-nvme/nvme-cli)
     
 If you are not running Ubuntu, please see the nvme-cli github project for instructions.
 
