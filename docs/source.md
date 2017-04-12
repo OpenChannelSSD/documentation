@@ -25,12 +25,9 @@ The source code for the LightNVM core is placed within
     drivers/lightnvm/core.c
     include/linux/lightnvm.h
 
-with the generic media manager implemented at:
+and pblk and rrpc targets available at:
 
-    drivers/lightnvm/gennvm.[ch]
-
-and rrpc target available at:
-
+    drivers/lightnvm/pblk.[ch]
     drivers/lightnvm/rrpc.[ch]
 
-See the individual files for how to implement new targets and media managers.
+See the individual files for how to implement new targets

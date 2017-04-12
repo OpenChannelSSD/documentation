@@ -39,10 +39,10 @@ can be instantiated at run-time. For now, rrpc and pblk are the available implem
 After successfully registering the target. You may issue reads and writes to
 /dev/$TARGET_NAME
 
-For example, to allocate LUN 0 to target tests using rrpc in the NVMe device
+For example, to allocate LUNs 0 to 63 to a pblk instance using the NVMe device
 nvme0n1:
 
-    nvme lnvm create -d nvme0n1 -n mydevice -t rrpc -b 0 -e 0
+    nvme lnvm create -d nvme0n1 -n mydevice -t pblk -b 0 -e 63
 
 A target instance are removed again by:
 

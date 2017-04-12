@@ -77,6 +77,13 @@ and initialized by:
 
     sudo nvme lnvm init -d nvme0n1
     sudo nvme lnvm create -d nvme0n1 --lun-begin=0 --lun-end=3 -n mydevice -t pblk
+
+use the option -f to avoid recovering the L2P table from the device for quick testing
+
+    sudo nvme lnvm create -d nvme0n1 --lun-begin=0 --lun-end=3 -n mydevice -t pblk -f
+
+for other options for --help on each command. For example
+    sudo nvme lnvm create --help
     
 Assuming nvme0n1 was shown during "nvme lnvm list", it will then expose /dev/mydevice as a block device using it as the backend. Please note that pblk is only available at the Linux kernel Github repository, and it yet to be upstream.
 

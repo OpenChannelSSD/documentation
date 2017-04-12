@@ -41,6 +41,7 @@ Examples of how to invoke the APIs is found in
       gennvm - /drivers/lightnvm/gennvm.c
       
     Target
+      pblk - /drivers/lightnvm/pblk.c
       rrpc - /drivers/lightnvm/rrpc.c
       
     Device-side
