@@ -23,4 +23,4 @@ When submitting a patch for the Linux kernel, CC the following:
 
 # How do I introduce a new NVMe SSD that supports the Open-Channel SSD interface? #
 
-Please update the "nvme_nvm_ns_supported" function in the the /drivers/host/nvme/lightnvm.c file with the appropriate PCI vendor, device id, and detection method. After the patch have been made, feel free to submit it to the Linux kernel.
+Please update the "nvme_nvm_ns_supported" function in the the /drivers/nvme/host/lightnvm.c file with the appropriate PCI vendor, device id, and detection method. After the patch have been made, feel free to submit it to the Linux kernel.
