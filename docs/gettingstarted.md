@@ -8,9 +8,9 @@ After booting the a supported kernel. The following must be met:
 2. A media manager on top of the device driver. The media manager manages the partition table for the device.
 3. A target on top of the block manager that exposes the Open-Channel SSD.
 
-## Install Kernel 4.4+
+## Install Kernel 4.12+
 
-LightNVM is directly supported in Linux kernel 4.4+. If you don't have a 4.4 kernel or later installed, you can follow the guide at: [http://linuxdaddy.com/blog/install-kernel-4-4-on-ubuntu/](http://linuxdaddy.com/blog/install-kernel-4-4-on-ubuntu/) to install.
+LightNVM is directly supported in Linux since kernel 4.4. Pblk, which is used to get started, is available since 4.12+. Make sure to install 4.12+ or later if you want to use pblk. 
 
 ## Install nvme-cli tool
 
@@ -78,7 +78,7 @@ and initialized by:
     sudo nvme lnvm init -d nvme0n1
     sudo nvme lnvm create -d nvme0n1 --lun-begin=0 --lun-end=3 -n mydevice -t pblk
 
-use the option -f to avoid recovering the L2P table from the device for quick testing
+use the option -f to avoid recovering the L2P table from the device for quick initialization
 
     sudo nvme lnvm create -d nvme0n1 --lun-begin=0 --lun-end=3 -n mydevice -t pblk -f
 
@@ -103,11 +103,7 @@ Make sure that the .config file at least includes:
     # Expose the /sys/module/lnvm/parameters/configure_debug interface
     CONFIG_NVM_DEBUG=y
     # Target support (required to expose the open-channel SSD as a block device)
-    CONFIG_NVM_PBLK=y
-    # Do not perform recovery upon boot (Disables recovery of the mapping table upon boot. Disable when using across boots)
-    CONFIG_NVM_PBLK_NO_RECOV=y
-    # generic media manager support (required)
-    CONFIG_NVM_GENNVM=y
+    CONFIG_NVM_PBLK=y    
     # For NVMe support
     CONFIG_BLK_DEV_NVME=y
 
