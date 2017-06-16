@@ -46,4 +46,4 @@ nvme0n1:
 
 A target instance are removed again by:
 
-    nvme lnvm remove targetname
+    nvme lnvm remove -n targetname
