@@ -16,7 +16,7 @@ or installed from [https://github.com/linux-nvme/nvme-cli](https://github.com/li
     
 If you are not running Ubuntu, please see the nvme-cli github project for instructions.
 
-## Use Open-Channel SSD hardware
+## Using Open-Channel SSD hardware
 
 If you have a LightNVM SDK from CNEX Labs, or another Open-Channel SSD, you should be able to see the device using
 
