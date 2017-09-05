@@ -61,7 +61,7 @@ QEMU support the following LightNVM-specific parameters:
 
 The list of LightNVM parameters in QEMU can be found in `$QUEMU_DIR/hw/block/nvme.c` at the _Advanced optional options_ comment.
 
-## Instantiate media manager and target
+## Instantiate pblk
 
 When the installation is finished and the kernel have been booted. Devices can be enumerated by:
 
