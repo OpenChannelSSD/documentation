@@ -1,16 +1,10 @@
 # How to use
 
-To use Open-Channel SSDs, support in the operating system kernel is required. Support in the Linux kernel has been supported since 4.4 with the inclusion of the LightNVM subsystem. The project is still under development, therefore the latest release or release candidate is preferred. The latest source code is available at [https://github.com/OpenChannelSSD/linux](https://github.com/OpenChannelSSD/linux).
+To use an Open-Channel SSD, support in the operating system kernel is required. The Linux kernel has support since the LightNVM subsystem was introduced in version 4.4. As the project is under development, it is preferred to use the latest available kernel. 
 
-After booting the a supported kernel. The following must be met:
+## Install Linux Kernel 4.12+
 
-1. A compatible device, such as QEMU NVMe or an Open-Channel SSD, such as the CNEX Labs LightNVM SDK.
-2. A media manager on top of the device driver. The media manager manages the partition table for the device.
-3. A target on top of the block manager that exposes the Open-Channel SSD.
-
-## Install Kernel 4.12+
-
-LightNVM is directly supported in Linux since kernel 4.4. Pblk, which is used to get started, is available since 4.12+. Make sure to install 4.12+ or later if you want to use pblk. 
+Pblk, which is used in this guide, is available from version 4.12+. Make sure to install and boot the kernel before continuing.
 
 ## Install nvme-cli tool
 
@@ -22,7 +16,7 @@ or installed from [https://github.com/linux-nvme/nvme-cli](https://github.com/li
     
 If you are not running Ubuntu, please see the nvme-cli github project for instructions.
 
-## Using Open-Channel SSD hardware
+## Use Open-Channel SSD hardware
 
 If you have a LightNVM SDK from CNEX Labs, or another Open-Channel SSD, you should be able to see the device using
 
@@ -35,7 +29,7 @@ which should output the following:
     Device      	Block manager	Version
     nvme0n1     	gennvm      	(0,1,0)
     
-If block manager reports none, the device should be first initialized using
+If block manager reports none (only pre-4.8 kernels), the device should be first initialized using
 
     sudo nvme lnvm init -d nvme0n1
     
@@ -75,7 +69,6 @@ When the installation is finished and the kernel have been booted. Devices can b
    
 and initialized by:
 
-    sudo nvme lnvm init -d nvme0n1
     sudo nvme lnvm create -d nvme0n1 --lun-begin=0 --lun-end=3 -n mydevice -t pblk
 
 use the option -f to avoid recovering the L2P table from the device for quick initialization
