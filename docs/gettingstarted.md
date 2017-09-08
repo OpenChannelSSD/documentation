@@ -47,25 +47,28 @@ Using Keith Busch's QEMU branch, it is possible to expose a LightNVM-compatible 
 
 Create an empty file to hold your NVMe device.
 
-    dd if=/dev/zero of=blknvme bs=1M count=1024
+    dd if=/dev/zero of=blknvme bs=1M count=8196
 
-this creates a zeroed 1GB file called "blknvme". You can boot your favorite
+this creates a zeroed 8GB file called "blknvme". You can boot your favorite
 Linux image with
 
     qemu-system-x86_64 -m 4G -smp 1 --enable-kvm
     -hda $LINUXVMFILE -append "root=/dev/sda1"
     -kernel "/home/foobar/git/linux/arch/x86_64/boot/bzImage"
     -drive file=blknvme,if=none,id=mynvme
-    -device nvme,drive=mynvme,serial=deadbeef,namespaces=1,lver=1,nlbaf=5,lba_index=3,mdts=10
+    -device nvme,drive=mynvme,serial=deadbeef,namespaces=1,lver=1,nlbaf=5,lba_index=3,mdts=10,lnum_lun=4
 
 Here, replace $LINUXVMFILE with your pre-installed Linux virtual machine.
 
 QEMU support the following LightNVM-specific parameters:
 
     - lver=<int>       : version of the LightNVM standard to use, Default:1
-    - lbbtable=<file>    : Load bad block table from file destination (Provide path to file. If no file is provided a bad block table will be generation. Look at lbbfrequency. Default: Null (no file).
+    - lbbtable=<file>  : Load bad block table from file destination (Provide path to file. If no file is provided a bad block table will be generation. Look at lbbfrequency. Default: Null (no file).
+    - lnum_lun=<X>     : Number of LUNs to expose. Minimum 2 for if using pblk.
 
 The list of LightNVM parameters in QEMU can be found in `$QUEMU_DIR/hw/block/nvme.c` at the _Advanced optional options_ comment.
+
+Inside the virtual machine, you can now see the drive as it was a traditional Open-Channel SSD.
 
 ## Instantiate pblk
 
