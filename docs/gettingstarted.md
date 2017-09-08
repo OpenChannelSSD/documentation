@@ -56,7 +56,7 @@ Linux image with
     -hda $LINUXVMFILE -append "root=/dev/sda1"
     -kernel "/home/foobar/git/linux/arch/x86_64/boot/bzImage"
     -drive file=blknvme,if=none,id=mynvme
-    -device nvme,drive=mynvme,serial=deadbeef,namespaces=1,lver=1,nlbaf=5,lba_index=3,mdts=10,lnum_lun=4
+    -device nvme,drive=mynvme,serial=deadbeef,namespaces=1,lver=1,nlbaf=5,lba_index=3,mdts=10,lnum_lun=4,lnum_pln=2
 
 Here, replace $LINUXVMFILE with your pre-installed Linux virtual machine.
 
@@ -65,6 +65,7 @@ QEMU support the following LightNVM-specific parameters:
     - lver=<int>       : version of the LightNVM standard to use, Default:1
     - lbbtable=<file>  : Load bad block table from file destination (Provide path to file. If no file is provided a bad block table will be generation. Look at lbbfrequency. Default: Null (no file).
     - lnum_lun=<X>     : Number of LUNs to expose. Minimum 2 for if using pblk.
+    - lnum_pln=<X>     : Number of planes to expose. 
 
 The list of LightNVM parameters in QEMU can be found in `$QUEMU_DIR/hw/block/nvme.c` at the _Advanced optional options_ comment.
 
@@ -85,6 +86,7 @@ use the option -f to avoid recovering the L2P table from the device for quick in
     sudo nvme lnvm create -d nvme0n1 --lun-begin=0 --lun-end=3 -n mydevice -t pblk -f
 
 for other options for --help on each command. For example
+ 
     sudo nvme lnvm create --help
     
 Assuming nvme0n1 was shown during "nvme lnvm list", it will then expose /dev/mydevice as a block device using it as the backend. Please note that pblk is only available at the Linux kernel Github repository, and it yet to be upstream.
