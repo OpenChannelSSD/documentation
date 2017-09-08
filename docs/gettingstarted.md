@@ -1,6 +1,10 @@
 # How to use
 
-To use an Open-Channel SSD, support in the operating system kernel is required. The Linux kernel has support since the LightNVM subsystem was introduced in version 4.4. As the project is under development, it is preferred to use the latest available kernel. 
+To use an Open-Channel SSD, support in the operating system kernel is required. The Linux kernel has support since the LightNVM subsystem was introduced in version 4.4. As the project is under development, it is preferred to use the latest available kernel. You'll need the the following to get going:
+
+ * Linux kernel 4.12+
+ * Latest nvme-cli
+ * qemu with Open-Channel support (optional)
 
 ## Install Linux Kernel 4.12+
 
@@ -16,7 +20,9 @@ or installed from [https://github.com/linux-nvme/nvme-cli](https://github.com/li
     
 If you are not running Ubuntu, please see the nvme-cli github project for instructions.
 
-## Using Open-Channel SSD hardware
+## Device options
+
+### Open-Channel SSD hardware
 
 If you have a LightNVM SDK from CNEX Labs, or another Open-Channel SSD, you should be able to see the device using
 
@@ -33,11 +39,11 @@ If block manager reports none (only pre-4.8 kernels), the device should be first
 
     sudo nvme lnvm init -d nvme0n1
     
-## Using QEMU
+### QEMU
 
 Using Keith Busch's QEMU branch, it is possible to expose a LightNVM-compatible device using a backend-file. See the guide below for installing his version.
 
-### Configure QEMU
+#### Configure QEMU
 
 Create an empty file to hold your NVMe device.
 
