@@ -56,7 +56,7 @@ Linux image with
     -hda $LINUXVMFILE -append "root=/dev/sda1"
     -kernel "/home/foobar/git/linux/arch/x86_64/boot/bzImage"
     -drive file=blknvme,if=none,id=mynvme
-    -device nvme,drive=mynvme,serial=deadbeef,namespaces=1,lver=1,nlbaf=5,lba_index=3,mdts=10,lnum_lun=4,lnum_pln=2,lsecs_per_pg=4
+    -device nvme,drive=mynvme,serial=deadbeef,namespaces=1,lver=1,nlbaf=5,lba_index=3,mdts=10,lnum_lun=4,lnum_pln=1,lsecs_per_pg=4
 
 Here, replace $LINUXVMFILE with your pre-installed Linux virtual machine.
 
