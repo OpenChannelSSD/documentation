@@ -17,7 +17,7 @@ If you want to submit a Linux kernel patch, please follow the Linux kernel guide
 
 When submitting a patch for the Linux kernel, CC the following:
 
- * Maintainer: matias@cnexlabs.com
+ * Maintainer: mb@lightnvm.io
  * Linux block layer list: linux-block@vger.kernel.org
  * Linux kernel mailing list: linux-kernel@vger.kernel.org
 
