@@ -5,7 +5,9 @@ google_analytics: ['UA-57193430-2', 'openchannelssd.readthedocs.org']
 pages:
  - Introduction: index.md
  - Documentation:
+     - 'Overview': overview.md
      - 'Getting Started': gettingstarted.md
+     - 'Virtual OCSSD': qemu.md
      - 'Command Line': commands.md
      - 'Hardware' : hardware.md
  - Developer Documentation:
