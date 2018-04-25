@@ -37,7 +37,7 @@ Compile the kernel and install using the guide for your distribution.
 
 # Qemu Development Environment
 
-To speed up development, one can pass a kernel image directly to qemu to boot. Example kernel config file is provided in /kernel.config. Overwrite .config in the kernel source directory and compile.
+To speed up development, one can pass a kernel image directly to qemu to boot. Example kernel config file is provided in the qemu-name repository (/kernel.config). Overwrite .config in the kernel source directory and compile.
 
 The kernel can be passed through to qemu using the following arguments.
 
