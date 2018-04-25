@@ -1,6 +1,6 @@
 # Linux kernel support
 
-Support for Open-Channel SSDs was added from version 4.8 of the Linux kernel, pblk was added in 4.12, liblightnvm support was added in 4.14, and finally the 2.0 specification support was added to 4.17.
+Support for Open-Channel SSDs is available in version 4.4+ of the Linux kernel, pblk was added in 4.12, liblightnvm support was added in 4.14, and finally the 2.0 specification support was added in 4.17.
 
 The open-channel SSD can either be accessed through lightnvm targets or liblightnvm.
 
@@ -22,7 +22,7 @@ Devices can be enumerated by:
 
     sudo nvme lnvm list
 
-which may output the following:
+which for a single drive outputs the following:
 
     Number of devices: 1
     Device      	Block manager	Version
@@ -64,3 +64,5 @@ Initialize pblk as /dev/mydevice on nvme0n1, using parallel unit 0-3.
 use the option -f to skip recoverying of mapping table. This removes all data on drive.
 
     sudo nvme lnvm create -d nvme0n1 --lun-begin=0 --lun-end=3 -n mydevice -t pblk -f
+
+More information at [http://lightnvm.io/pblk-tools/](http://lightnvm.io/pblk-tools/)
