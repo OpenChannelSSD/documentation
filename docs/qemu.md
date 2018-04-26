@@ -16,13 +16,13 @@ Note that revision 1.2 is no longer being maintained.
 
 # Use a custom kernel
 
-If one wishes to follow the bleeding edge developent for lightnvm in the kernel. It can be used as follows:
+The development of the lightnvm subsystem is hosted here:
 
    `git clone https://github.com/OpenChannelSSD/linux.git`
 
-and checkout the latest for-4.XX/core branch.
+and the latest work is found in the for-4.XX/core branch.
 
-Make sure that the .config file at least includes:
+Make sure that the Linux kernel .config file at least includes:
 
     # For NVMe support
     CONFIG_BLK_DEV_NVME=y
@@ -37,7 +37,7 @@ Compile the kernel and install using the guide for your distribution.
 
 # Qemu Development Environment
 
-To speed up development, one can pass a kernel image directly to qemu to boot. Example kernel config file is provided in the qemu-name repository (/kernel.config). Overwrite .config in the kernel source directory and compile.
+To speed up development, one can pass a kernel image directly to qemu to boot. Example kernel config file is provided in the qemu-nvme repository (/kernel.config). Overwrite .config in the kernel source directory and compile.
 
 The kernel can be passed through to qemu using the following arguments.
 
