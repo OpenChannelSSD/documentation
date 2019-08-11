@@ -14,13 +14,13 @@ Revision 1.2 implementation is available here: [https://github.com/OpenChannelSS
 
 Note that revision 1.2 is no longer being maintained.
 
-# Use a custom kernel
+# Kernel
 
-The development of the lightnvm subsystem is hosted here:
+pblk and the LightNVM subsystem will typically not be enabled in your distro kernel so you probably need to compile one. Use the most recent mainline kernel or (better) use the lightnvm subsystem development tree:
 
    `git clone https://github.com/OpenChannelSSD/linux.git`
 
-and the latest work is found in the for-4.XX/core branch.
+The latest work is found in the for-x.x/core branch.
 
 Make sure that the Linux kernel .config file at least includes:
 
