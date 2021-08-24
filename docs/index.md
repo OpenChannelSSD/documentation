@@ -1,3 +1,6 @@
+# Zoned Namespace (ZNS) SSDs superseeds the work on OCSSDs.
+Please see [ZNS: Avoiding the Block Interface Tax for flash-based SSDs](https://www.usenix.org/conference/atc21/presentation/bjorling) presented at USENIX ATC 2021 and https://zonedstorage.io for the latest updates. 
+
 # Open-Channel Solid State Drives
 A new class of SSDs has been developed known as Open-Channel SSDs. Open-Channel SSDs differ from a traditional SSD in that they expose the internal parallelism of the SSD to the host and allows it manage it. This allows Open-Channel SSDs to provide three properties to the host: I/O isolation, predictable latencies, and software-defined non-volatile memory.
 
